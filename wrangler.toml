@@ -1,0 +1,7 @@
+# Cloudflare Pages — 静的アセットは dist/（pnpm build:ssg 後）
+# 初回: wrangler login
+# デプロイ: pnpm deploy（または wrangler pages deploy dist --project-name=<名前>）
+
+name = "react-router-lifeline-chat"
+compatibility_date = "2025-03-21"
+pages_build_output_dir = "dist"

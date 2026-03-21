@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "TypeScriptTeam.native-preview"
+  ]
+}
+

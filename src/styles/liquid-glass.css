@@ -1,0 +1,251 @@
+/**
+ * Liquid Glass–inspired surfaces (backdrop blur, layered highlight/shadow).
+ * See: https://css-tricks.com/getting-clarity-on-apples-liquid-glass/
+ * Contrast kept intentionally solid for readable chat text.
+ */
+
+@layer components {
+  /* Consultation mode pills */
+  .lg-glass-btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      background 0.28s ease,
+      box-shadow 0.28s ease,
+      border-color 0.28s ease,
+      transform 0.2s ease;
+    color: rgba(44, 62, 80, 0.95);
+    background: rgba(255, 255, 255, 0.48);
+    backdrop-filter: blur(22px) saturate(175%);
+    -webkit-backdrop-filter: blur(22px) saturate(175%);
+    border: 1px solid rgba(167, 199, 231, 0.65);
+    box-shadow:
+      0 4px 18px rgba(45, 95, 150, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -1px 0 rgba(120, 160, 210, 0.12);
+  }
+
+  .lg-glass-btn:hover {
+    background: rgba(255, 255, 255, 0.58);
+    border-color: rgba(167, 199, 231, 0.85);
+    box-shadow:
+      0 6px 22px rgba(45, 95, 150, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 rgba(120, 160, 210, 0.1);
+  }
+
+  .lg-glass-btn:active {
+    transform: scale(0.98);
+  }
+
+  .lg-glass-btn--active {
+    color: #fff;
+    background: linear-gradient(
+      145deg,
+      rgba(74, 144, 226, 0.72) 0%,
+      rgba(74, 144, 226, 0.55) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.48);
+    text-shadow: 0 1px 2px rgba(0, 40, 90, 0.2);
+    box-shadow:
+      0 6px 26px rgba(74, 144, 226, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      inset 0 -1px 0 rgba(0, 60, 130, 0.18);
+  }
+
+  .lg-glass-btn--active:hover {
+    background: linear-gradient(
+      145deg,
+      rgba(74, 144, 226, 0.82) 0%,
+      rgba(90, 160, 235, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Chat bubbles */
+  .lg-glass-bubble-user {
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 35, 80, 0.18);
+    background: linear-gradient(
+      155deg,
+      rgba(74, 144, 226, 0.58) 0%,
+      rgba(95, 165, 238, 0.48) 55%,
+      rgba(70, 135, 215, 0.52) 100%
+    );
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow:
+      0 10px 36px rgba(55, 120, 200, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      inset 0 -1px 0 rgba(0, 50, 120, 0.12);
+  }
+
+  .lg-glass-bubble-other {
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem;
+    color: rgba(44, 62, 80, 0.95);
+    background: linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(167, 199, 231, 0.38) 100%
+    );
+    backdrop-filter: blur(22px) saturate(185%);
+    -webkit-backdrop-filter: blur(22px) saturate(185%);
+    border: 1px solid rgba(167, 199, 231, 0.5);
+    box-shadow:
+      0 8px 32px rgba(45, 85, 130, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.62),
+      inset 0 -1px 0 rgba(140, 175, 220, 0.15);
+  }
+
+  /* Message input dock — AIモード（lg-glass-btn--active）と同系の青リキッドグラス */
+  .lg-glass-dock {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+    background: linear-gradient(
+      145deg,
+      rgba(74, 144, 226, 0.72) 0%,
+      rgba(74, 144, 226, 0.55) 100%
+    );
+    backdrop-filter: blur(32px) saturate(185%);
+    -webkit-backdrop-filter: blur(32px) saturate(185%);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    border-bottom: none;
+    box-shadow:
+      0 -12px 48px rgba(74, 144, 226, 0.38),
+      0 -4px 24px rgba(74, 144, 226, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      inset 0 -1px 0 rgba(0, 60, 130, 0.18);
+  }
+
+  .lg-glass-field {
+    flex: 1;
+    min-width: 0;
+    border-radius: 9999px;
+    padding: 1rem 1.5rem;
+    color: rgba(28, 45, 62, 0.95);
+    background: rgba(255, 255, 255, 0.52);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      inset 0 1px 2px rgba(255, 255, 255, 0.75),
+      inset 0 -1px 1px rgba(120, 160, 210, 0.12);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .lg-glass-field::placeholder {
+    color: rgba(45, 70, 95, 0.45);
+  }
+
+  .lg-glass-field:focus {
+    outline: none;
+    border-color: rgba(74, 144, 226, 0.75);
+    box-shadow:
+      0 0 0 3px rgba(74, 144, 226, 0.22),
+      inset 0 1px 2px rgba(255, 255, 255, 0.8),
+      inset 0 -1px 1px rgba(120, 160, 210, 0.1);
+    background: rgba(255, 255, 255, 0.62);
+  }
+
+  /* メッセージ入力 — ドック上で背景をはっきり白に */
+  .lg-glass-field--white {
+    background: #fff;
+    border: 1px solid rgba(230, 236, 245, 0.95);
+    box-shadow:
+      inset 0 1px 2px rgba(255, 255, 255, 1),
+      inset 0 -1px 1px rgba(200, 210, 225, 0.2);
+  }
+
+  .lg-glass-field--white:focus {
+    background: #fff;
+    border-color: rgba(74, 144, 226, 0.75);
+    box-shadow:
+      0 0 0 3px rgba(74, 144, 226, 0.22),
+      inset 0 1px 2px rgba(255, 255, 255, 1),
+      inset 0 -1px 1px rgba(200, 210, 225, 0.15);
+  }
+
+  /* Round icon / send buttons in input row */
+  .lg-glass-round {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 9999px;
+    transition:
+      background 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.18s ease,
+      opacity 0.2s ease;
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+      0 4px 16px rgba(45, 95, 150, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+
+  .lg-glass-round:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow:
+      0 6px 20px rgba(45, 95, 150, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  }
+
+  .lg-glass-round:active:not(:disabled) {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .lg-glass-round--muted {
+    color: rgba(44, 62, 80, 0.92);
+    background: rgba(167, 199, 231, 0.35);
+    border-color: rgba(167, 199, 231, 0.55);
+  }
+
+  .lg-glass-round--muted:hover:not(:disabled) {
+    background: rgba(167, 199, 231, 0.48);
+  }
+
+  .lg-glass-round--accent {
+    color: #fff;
+    background: linear-gradient(
+      145deg,
+      rgba(74, 144, 226, 0.75) 0%,
+      rgba(74, 144, 226, 0.58) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.42);
+    text-shadow: 0 1px 2px rgba(0, 40, 90, 0.2);
+    box-shadow:
+      0 6px 22px rgba(74, 144, 226, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 60, 120, 0.15);
+  }
+
+  .lg-glass-round--accent:hover:not(:disabled) {
+    background: linear-gradient(
+      145deg,
+      rgba(74, 144, 226, 0.88) 0%,
+      rgba(90, 160, 235, 0.72) 100%
+    );
+  }
+
+  .lg-glass-round:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
