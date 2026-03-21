@@ -248,4 +248,48 @@
     cursor: not-allowed;
     transform: none;
   }
+
+  /* Chat thread scrollbar */
+  .chat-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(74, 144, 226, 0.62) rgba(255, 255, 255, 0.2);
+  }
+
+  .chat-scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .chat-scrollbar::-webkit-scrollbar-track {
+    margin: 8px 0;
+    border-radius: 9999px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(167, 199, 231, 0.28) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      inset 0 -1px 0 rgba(120, 160, 210, 0.16);
+  }
+
+  .chat-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(
+      180deg,
+      rgba(74, 144, 226, 0.86) 0%,
+      rgba(90, 160, 235, 0.68) 100%
+    );
+    box-shadow:
+      0 4px 12px rgba(74, 144, 226, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  }
+
+  .chat-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      rgba(74, 144, 226, 0.95) 0%,
+      rgba(90, 160, 235, 0.78) 100%
+    );
+  }
 }
