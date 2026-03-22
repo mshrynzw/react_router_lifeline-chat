@@ -3,7 +3,7 @@ import { ChatMessage } from "./components/ChatMessage";
 import { Header } from "./components/Header";
 import { MeditationParticles } from "./components/MeditationParticles";
 import { MessageInput } from "./components/MessageInput";
-import { getMessages, saveMessage } from "./lib/messages";
+import { getMessages } from "./lib/messages";
 
 interface Message {
   id: string;
@@ -41,6 +41,7 @@ async function loadMessagesForUser(userId: string): Promise<Message[]> {
 export default function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -81,38 +82,25 @@ export default function App() {
     }
 
     void (async () => {
-      const { error: userErr } = await saveMessage(userId!, "user", text);
-      if (userErr) {
-        console.error(userErr);
-        return;
+      setSending(true);
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId, content: text }),
+        });
+        if (!res.ok) {
+          const err = (await res.json().catch(() => ({}))) as {
+            error?: string;
+          };
+          console.error(err.error ?? res.statusText);
+          return;
+        }
+        await res.json();
+        setMessages(await loadMessagesForUser(userId!));
+      } finally {
+        setSending(false);
       }
-      setMessages(await loadMessagesForUser(userId!));
-
-      const delay = 1000 + Math.random() * 1500;
-      window.setTimeout(() => {
-        void (async () => {
-          const responses = [
-            "Thank you for sharing that with me. I'm here to listen. Could you tell me more about how you've been feeling?",
-            "I hear you. It's completely okay to feel this way. Would you like to talk about what's been on your mind?",
-            "That sounds difficult. Remember, this is a safe space and there's no judgment here. Take your time.",
-            "I appreciate you opening up. Your feelings are valid. How long have you been experiencing this?",
-            "It takes courage to reach out. I'm glad you're here. What would help you feel supported right now?",
-          ];
-
-          const responseText =
-            responses[Math.floor(Math.random() * responses.length)];
-          const { error: asstErr } = await saveMessage(
-            userId!,
-            "assistant",
-            responseText,
-          );
-          if (asstErr) {
-            console.error(asstErr);
-            return;
-          }
-          setMessages(await loadMessagesForUser(userId!));
-        })();
-      }, delay);
     })();
   };
 
@@ -140,7 +128,7 @@ export default function App() {
           )}
         </div>
 
-        <MessageInput onSendMessage={handleSendMessage} />
+        <MessageInput onSendMessage={handleSendMessage} disabled={sending} />
       </div>
     </>
   );

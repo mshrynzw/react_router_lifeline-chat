@@ -1,17 +1,29 @@
 import { createServerClient } from "@supabase/ssr";
 
-export function createSupabaseServerClient(_request: Request) {
-  return createServerClient(
-    process.env.VITE_SUPABASE_URL!,
-    process.env.VITE_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get() {
-          return undefined;
-        },
-        set() {},
-        remove() {},
+type SupabaseServerEnv = {
+  VITE_SUPABASE_URL?: string;
+  VITE_SUPABASE_ANON_KEY?: string;
+};
+
+export function createSupabaseServerClient(
+  _request: Request,
+  env?: SupabaseServerEnv,
+) {
+  const url =
+    env?.VITE_SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+  const anonKey =
+    env?.VITE_SUPABASE_ANON_KEY ?? process.env.VITE_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) {
+    throw new Error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY");
+  }
+
+  return createServerClient(url, anonKey, {
+    cookies: {
+      get() {
+        return undefined;
       },
+      set() {},
+      remove() {},
     },
-  );
+  });
 }

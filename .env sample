@@ -1,2 +1,5 @@
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
+OPENAI_API_KEY=
+# Responses API モデル（例: gpt-5.4-nano）。未設定時は gpt-5.4-nano
+OPENAI_MODEL=
